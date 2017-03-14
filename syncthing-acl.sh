@@ -15,7 +15,6 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 REPOSITORY="/export/storage"
-ACLPATH="$REPOSITORY/.acls"
 APPNAME="syncthing-acl"
 TEMPACLFILE=/tmp/$APPNAME.$$
 IGNOREFILES="\.syncthing|\.stversions|\.stfolder|lost\+found"
@@ -29,13 +28,14 @@ DEBUGMESSAGELEVEL=3
 WAITTIME=2
 
 if [ -f /etc/sysconfig/syncthing-acl ]; then
-   source /etc/sysconfig/syncthing-acl
+   /etc/sysconfig/syncthing-acl
 fi
 
 if [ -f /etc/default/syncthing-acl ]; then
-   source /etc/default/syncthing-acl
+   /etc/default/syncthing-acl
 fi
 
+ACLPATH="$REPOSITORY/.acls"
 
 #=========Logger
 
@@ -196,7 +196,7 @@ echo $ACLFOLDER
 [ ! -d "$PIDFOLDER" ] && mkdir -p "$PIDFOLDER"
 echo $$ > $PIDFILE
 
-syncthing-log 0  "Start Up : Script $0 `stat -c%y $0` Version $VERSION PID=$$"
+syncthing-log 0  "Start Up : Script $0 `stat -c%y $0` Version $VERSION PID=$$ ($REPOSITORY)"
 
 trap exitcleanup SIGHUP SIGINT SIGTERM
 

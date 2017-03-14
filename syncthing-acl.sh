@@ -28,11 +28,11 @@ DEBUGMESSAGELEVEL=3
 WAITTIME=2
 
 if [ -f /etc/sysconfig/syncthing-acl ]; then
-   /etc/sysconfig/syncthing-acl
+   source /etc/sysconfig/syncthing-acl
 fi
 
 if [ -f /etc/default/syncthing-acl ]; then
-   /etc/default/syncthing-acl
+   source /etc/default/syncthing-acl
 fi
 
 ACLPATH="$REPOSITORY/.acls"
